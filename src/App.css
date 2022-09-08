@@ -1,0 +1,11 @@
+.App{
+  height: 100vh;
+}
+
+.battlefield-table{
+  min-width: 350px;
+  min-height: 350px;
+  border: 1px blue solid;
+  border-collapse: collapse;
+  user-select: none;
+}
