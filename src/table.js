@@ -22,7 +22,6 @@ function TableRender(){
             return (<tr key={Index} className='battlefield-row'>
               {items.map((subItems, sIndex)=>{
                 return <td key={sIndex} className='battlefield-cell battlefield-cell_empty' data-x={sIndex+1} data-y={Index+1} data-b={false} onClick={(e) => tap(e)}>
-                    
                 </td>
               })}
             </tr>)
