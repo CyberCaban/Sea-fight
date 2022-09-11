@@ -9,3 +9,20 @@
   border-collapse: collapse;
   user-select: none;
 }
+
+.battlefield-cell{
+  width: 2em;
+  height: 2em;
+}
+
+.battlefield-cell_busy{
+  background-color: blue;
+  /* color: black; */
+  width: 2em;
+  height: 2em;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  left: 0px;
+  top: 0px;
+  margin: -2px;
+}
