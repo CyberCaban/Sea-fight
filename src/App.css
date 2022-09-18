@@ -16,6 +16,10 @@
   height: 2em;
 }
 
+.battlefield-cell_hover{
+  background-color: lightblue;
+}
+
 .battlefield-cell_busy{
   background-color: blue;
   /* color: black; */
@@ -51,6 +55,10 @@
   height: 2em;
   background-color: rgb(24, 1, 230);
   opacity: 80%;
+}
+
+.opacity{
+  opacity: 70%;
 }
 
 .ship_4x{

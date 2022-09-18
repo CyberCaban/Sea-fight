@@ -1,19 +1,12 @@
 import './App.css';
-import TableRender from "./table.js"
-import ShipSelect from './ships';
+import Radar from './components/radar'
 
 function App() {
-
   return (
     <div className="App">
 
-      <div className="your_radar">
+      <Radar/>
 
-        <TableRender/>
-
-        <ShipSelect/>
-        
-      </div>
     </div>
   );
 }
