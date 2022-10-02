@@ -16,19 +16,23 @@ function TableRender(props){
     }
   }
 
+  function dragEndHandler(e) {
+    console.log(e);
+  }
+
   function dragOverHandler(e) {
     switch (props.ship) {
       case "2x":
         e.target.className = "battlefield-cell battlefield-cell_hover"
         e.target.nextSibling.className = "battlefield-cell battlefield-cell_hover"
-        console.log(e.target.nextSibling);
+        // console.log(e.target.nextSibling);
         break;
 
       case "3x":
         e.target.className = "battlefield-cell battlefield-cell_hover"
         e.target.nextSibling.className = "battlefield-cell battlefield-cell_hover"
         e.target.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_hover"
-        console.log(e.target.dataset);
+        // console.log(e.target.dataset);
         break;
       
       case "4x":
@@ -36,10 +40,11 @@ function TableRender(props){
         e.target.nextSibling.className = "battlefield-cell battlefield-cell_hover"
         e.target.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_hover"
         e.target.nextSibling.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_hover"
-        console.log(e.target.dataset);
+        // console.log(e.target.dataset);
         break;
 
       default:
+        e.target.className = "battlefield-cell battlefield-cell_hover"
         break;
     }
   }
@@ -49,14 +54,14 @@ function TableRender(props){
       case "2x":
         e.target.className = "battlefield-cell battlefield-cell_empty"
         e.target.nextSibling.className = "battlefield-cell battlefield-cell_empty"
-        console.log(e.target.nextSibling);
+        // console.log(e.target.nextSibling);
         break;
 
       case "3x":
         e.target.className = "battlefield-cell battlefield-cell_empty"
         e.target.nextSibling.className = "battlefield-cell battlefield-cell_empty"
         e.target.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_empty"
-        console.log(e.target.dataset);
+        // console.log(e.target.dataset);
         break;
       
       case "4x":
@@ -64,10 +69,11 @@ function TableRender(props){
         e.target.nextSibling.className = "battlefield-cell battlefield-cell_empty"
         e.target.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_empty"
         e.target.nextSibling.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_empty"
-        console.log(e.target.dataset);
+        // console.log(e.target.dataset);
         break;
 
       default:
+        e.target.className = "battlefield-cell battlefield-cell_empty"
         break;
     }
   }
@@ -87,7 +93,9 @@ function TableRender(props){
                 data-b={false} 
                 onClick={(e) => tap(e)} 
                 onDragOver={(e)=>{dragOverHandler(e)}} 
-                onDragLeave={(e)=>{dragLeaveHandler(e)}}>
+                onDragLeave={(e)=>{dragLeaveHandler(e)}}
+                onDragEnd={(e)=>{dragEndHandler(e)}}
+                >
                   {/* {props.ship} */}
               </td>
             })}
