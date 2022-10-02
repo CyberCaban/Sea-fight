@@ -3,21 +3,31 @@ import { useState, useEffect } from "react";
 function ShipSelect(props) {
 
     function shipUpd(shipType, count) {
-        const Arr = shipBay
+        const Arr = shipBay.slice()
         switch (shipType.dataset.size) {
             case "4x":
-                Arr[0].count--
-                setShipBay(Arr)
-                console.log(shipBay);
+                if (Arr[0].count>0 && props.FD!=1) {
+                    Arr[0].count--
+                    setShipBay(Arr)
+                }
                 break;
             case "3x":
-                
+                if (Arr[1].count>0 && props.FD!=1) {
+                    Arr[1].count--
+                    setShipBay(Arr)
+                }
                 break;
             case "2x":
-                
+                if (Arr[2].count>0 && props.FD!=1) {
+                    Arr[2].count--
+                    setShipBay(Arr)
+                }
                 break;
             case "1x":
-                
+                if (Arr[3].count>0 && props.FD!=1) {
+                    Arr[3].count--
+                    setShipBay(Arr)
+                }
                 break;
             default:
                 break;
@@ -25,28 +35,33 @@ function ShipSelect(props) {
     }
     
     function dragEndHandler(e){
-        e.target.classList.remove("opacity")
-        console.log(e.target.dataset);
-        shipUpd(e.target)
+        if (e.target.dataset.count!=0) {
+            props.handleTableChange(1)
+            e.target.classList.remove("opacity")
+            shipUpd(e.target);
+            console.log(e.target.dataset);
+        }
     }
 
     function dragOverHandler(e, items){
         e.preventDefault()
-        // console.log(e, items);
     }
 
     function dropHandler(e){
         console.log(e);
-        // e.preventDefault()
     }
 
     function dragStartHandler(e, items){
-        e.target.classList.add("opacity")
-        props.handleShipChange(items.shipType)
-        // console.log(e);
+        if (e.target.dataset.count!=0) {
+            e.target.classList.add("opacity")
+            props.handleShipChange(items)
+            // console.log(e.target.dataset.count);   
+        }else{
+            return
+        }
     }
 
-    const [shipBay, setShipBay] = useState([
+    let [shipBay, setShipBay] = useState([
         {
             shipType:'4x',
             count:1
@@ -62,7 +77,7 @@ function ShipSelect(props) {
         {
             shipType:'1x',
             count:4
-        },
+        }
     ])
 
     return (
@@ -72,9 +87,8 @@ function ShipSelect(props) {
                 return (<div className={"bay bay_" + `${items.shipType}` + `${items.count}`} key={index}>
                     <div 
                         className={"ship ship_" + `${items.shipType}`} 
-                        onDragStart={(e)=>{dragStartHandler(e, items)}} 
-                        // onDragLeave={(e)=>{dragEndHandler(e)}} 
-                        onDragEnd={(e)=>{dragEndHandler(e)}} 
+                        onDragStart={(e)=>{dragStartHandler(e, items)}}
+                        onDragEnd={(e)=>{dragEndHandler(e, items)}} 
                         onDragOver={(e)=>{dragOverHandler(e, items)}} 
                         onDrop={(e)=>{dropHandler(e, items)}} 
                         // onClick={()=>props.handleShipChange(items.shipType)}

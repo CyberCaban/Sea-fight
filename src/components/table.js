@@ -21,59 +21,83 @@ function TableRender(props){
   }
 
   function dragOverHandler(e) {
-    switch (props.ship) {
+    switch (props.ship.shipType) {
       case "2x":
-        e.target.className = "battlefield-cell battlefield-cell_hover"
-        e.target.nextSibling.className = "battlefield-cell battlefield-cell_hover"
-        // console.log(e.target.nextSibling);
+        if (props.ship.count!=0 && e.target.nextSibling) {
+          e.target.className = "battlefield-cell battlefield-cell_hover"
+          e.target.nextSibling.className = "battlefield-cell battlefield-cell_hover"
+          props.FD(0)
+        }
         break;
 
       case "3x":
-        e.target.className = "battlefield-cell battlefield-cell_hover"
-        e.target.nextSibling.className = "battlefield-cell battlefield-cell_hover"
-        e.target.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_hover"
-        // console.log(e.target.dataset);
+        if (props.ship.count!=0 && e.target.nextSibling && e.target.nextSibling.nextSibling) {
+          e.target.className = "battlefield-cell battlefield-cell_hover"
+          e.target.nextSibling.className = "battlefield-cell battlefield-cell_hover"
+          e.target.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_hover"
+          props.FD(0)
+        }
         break;
       
       case "4x":
-        e.target.className = "battlefield-cell battlefield-cell_hover"
-        e.target.nextSibling.className = "battlefield-cell battlefield-cell_hover"
-        e.target.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_hover"
-        e.target.nextSibling.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_hover"
-        // console.log(e.target.dataset);
+        if (props.ship.count!=0 && e.target.nextSibling && e.target.nextSibling.nextSibling && e.target.nextSibling.nextSibling.nextSibling) {
+          e.target.className = "battlefield-cell battlefield-cell_hover"
+          e.target.nextSibling.className = "battlefield-cell battlefield-cell_hover"
+          e.target.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_hover"
+          e.target.nextSibling.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_hover"
+          props.FD(0)
+        }
         break;
 
       default:
-        e.target.className = "battlefield-cell battlefield-cell_hover"
+        if (props.ship.count!=0) {
+          e.target.className = "battlefield-cell battlefield-cell_hover"
+          if (props.pulse==1) {
+            e.target.className = "battlefield-cell battlefield-cell_busy"
+            e.target.nextSibling.className = "battlefield-cell battlefield-cell_busy"
+            console.log(props.pulse);
+            props.clearPulse(0)
+          }
+          props.FD(0)
+        }
         break;
     }
   }
 
   function dragLeaveHandler(e) {
-    switch (props.ship) {
+    switch (props.ship.shipType) {
       case "2x":
-        e.target.className = "battlefield-cell battlefield-cell_empty"
-        e.target.nextSibling.className = "battlefield-cell battlefield-cell_empty"
-        // console.log(e.target.nextSibling);
+        if (props.ship.count!=0 && e.target.nextSibling) {
+          e.target.className = "battlefield-cell battlefield-cell_empty"
+          e.target.nextSibling.className = "battlefield-cell battlefield-cell_empty"
+          props.FD(1)
+        }
         break;
 
       case "3x":
-        e.target.className = "battlefield-cell battlefield-cell_empty"
-        e.target.nextSibling.className = "battlefield-cell battlefield-cell_empty"
-        e.target.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_empty"
-        // console.log(e.target.dataset);
+        if (props.ship.count!=0 && e.target.nextSibling && e.target.nextSibling.nextSibling) {
+          e.target.className = "battlefield-cell battlefield-cell_empty"
+          e.target.nextSibling.className = "battlefield-cell battlefield-cell_empty"
+          e.target.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_empty"
+          props.FD(1)
+        }
         break;
       
       case "4x":
-        e.target.className = "battlefield-cell battlefield-cell_empty"
-        e.target.nextSibling.className = "battlefield-cell battlefield-cell_empty"
-        e.target.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_empty"
-        e.target.nextSibling.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_empty"
-        // console.log(e.target.dataset);
+        if (props.ship.count!=0 && e.target.nextSibling && e.target.nextSibling.nextSibling && e.target.nextSibling.nextSibling.nextSibling) {
+          e.target.className = "battlefield-cell battlefield-cell_empty"
+          e.target.nextSibling.className = "battlefield-cell battlefield-cell_empty"
+          e.target.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_empty"
+          e.target.nextSibling.nextSibling.nextSibling.className = "battlefield-cell battlefield-cell_empty"
+          props.FD(1)
+        }
         break;
 
       default:
-        e.target.className = "battlefield-cell battlefield-cell_empty"
+        if (props.ship.count!=0) {
+          e.target.className = "battlefield-cell battlefield-cell_empty"
+          props.FD(1)
+        }
         break;
     }
   }
@@ -94,9 +118,8 @@ function TableRender(props){
                 onClick={(e) => tap(e)} 
                 onDragOver={(e)=>{dragOverHandler(e)}} 
                 onDragLeave={(e)=>{dragLeaveHandler(e)}}
-                onDragEnd={(e)=>{dragEndHandler(e)}}
+                onDrop={(e)=>{dragEndHandler(e)}}
                 >
-                  {/* {props.ship} */}
               </td>
             })}
           </tr>)

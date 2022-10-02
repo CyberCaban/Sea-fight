@@ -5,7 +5,7 @@
 .battlefield-table{
   min-width: 350px;
   min-height: 350px;
-  border: 1px blue solid;
+  border: 2px rgb(1, 60, 255) ridge;
   border-collapse: collapse;
   user-select: none;
   margin: 10px;
